@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.Goods" >
+    <id column="good_id" property="goodId" jdbcType="INTEGER" />
+    <result column="good_no" property="goodNo" jdbcType="VARCHAR" />
+    <result column="good_name" property="goodName" jdbcType="VARCHAR" />
+    <result column="good_img" property="goodImg" jdbcType="VARCHAR" />
+    <result column="good_price" property="goodPrice" jdbcType="VARCHAR" />
+    <result column="good_modified" property="goodModified" jdbcType="TIMESTAMP" />
+    <result column="good_note" property="goodNote" jdbcType="VARCHAR" />
+    <result column="good_num" property="goodNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    good_id, good_no, good_name, good_img, good_price, good_modified, good_note, good_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="queryAllGoods" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.pojo.Goods" >
+    insert into goods (good_id, good_no, good_name, 
+      good_img, good_price, good_modified, 
+      good_note, good_num)
+    values (#{goodId,jdbcType=INTEGER}, #{goodNo,jdbcType=VARCHAR}, #{goodName,jdbcType=VARCHAR}, 
+      #{goodImg,jdbcType=VARCHAR}, #{goodPrice,jdbcType=VARCHAR}, #{goodModified,jdbcType=TIMESTAMP}, 
+      #{goodNote,jdbcType=VARCHAR}, #{goodNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodId != null" >
+        good_id,
+      </if>
+      <if test="goodNo != null" >
+        good_no,
+      </if>
+      <if test="goodName != null" >
+        good_name,
+      </if>
+      <if test="goodImg != null" >
+        good_img,
+      </if>
+      <if test="goodPrice != null" >
+        good_price,
+      </if>
+      <if test="goodModified != null" >
+        good_modified,
+      </if>
+      <if test="goodNote != null" >
+        good_note,
+      </if>
+      <if test="goodNum != null" >
+        good_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodId != null" >
+        #{goodId,jdbcType=INTEGER},
+      </if>
+      <if test="goodNo != null" >
+        #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null" >
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodImg != null" >
+        #{goodImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null" >
+        #{goodPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodModified != null" >
+        #{goodModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodNote != null" >
+        #{goodNote,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNum != null" >
+        #{goodNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.Goods" >
+    update goods
+    <set >
+      <if test="goodNo != null" >
+        good_no = #{goodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null" >
+        good_name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodImg != null" >
+        good_img = #{goodImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodPrice != null" >
+        good_price = #{goodPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodModified != null" >
+        good_modified = #{goodModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodNote != null" >
+        good_note = #{goodNote,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNum != null" >
+        good_num = #{goodNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.Goods" >
+    update goods
+    set good_no = #{goodNo,jdbcType=VARCHAR},
+      good_name = #{goodName,jdbcType=VARCHAR},
+      good_img = #{goodImg,jdbcType=VARCHAR},
+      good_price = #{goodPrice,jdbcType=VARCHAR},
+      good_modified = #{goodModified,jdbcType=TIMESTAMP},
+      good_note = #{goodNote,jdbcType=VARCHAR},
+      good_num = #{goodNum,jdbcType=INTEGER}
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+</mapper>
